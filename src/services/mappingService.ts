@@ -21,6 +21,6 @@ export class MappingService {
     });
 
     const zippedFolder = await zip.generateAsync({ type: 'blob' });
-    FileSaver.saveAs(zippedFolder, `ReMap MIDI - ${new Date().toLocaleString()}.zip`);
+    FileSaver.saveAs(zippedFolder, 'Mapped MIDI.zip');
   }
 }
