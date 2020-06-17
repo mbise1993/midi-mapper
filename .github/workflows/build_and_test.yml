@@ -1,0 +1,21 @@
+name: Build and Test
+
+on: # rebuild any PRs and master branch changes
+  pull_request:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Build
+        run: |
+          yarn
+          yarn build
+
+      - name: Test
+        run: yarn test
