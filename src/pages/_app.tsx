@@ -1,6 +1,14 @@
 import Head from 'next/head';
 import React from 'react';
-import { AppBar, CssBaseline, Link, ThemeProvider, Toolbar, withStyles } from '@material-ui/core';
+import {
+  AppBar,
+  Box,
+  CssBaseline,
+  Link,
+  ThemeProvider,
+  Toolbar,
+  withStyles,
+} from '@material-ui/core';
 import { AppProps } from 'next/app';
 import { GitHub as GitHubIcon } from '@material-ui/icons';
 
@@ -36,14 +44,19 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
         <AppBar position="static" color="transparent">
           <StyledToolbar>
             <img src="/logo.png" alt="MIDI Mapper" height="40px" />
-            <Link
-              href="https://github.com/mbise1993/midi-mapper"
-              target="_blank"
-              color="textPrimary"
-              title="View on GitHub"
-            >
-              <GitHubIcon />
-            </Link>
+            <Box display="flex" alignItems="center">
+              <Link
+                href="https://github.com/mbise1993/midi-mapper"
+                target="_blank"
+                color="textPrimary"
+                title="View on GitHub"
+              >
+                Documentation
+              </Link>
+              <Box marginLeft="4px">
+                <GitHubIcon fontSize="small" />
+              </Box>
+            </Box>
           </StyledToolbar>
         </AppBar>
         <Component {...pageProps} />
