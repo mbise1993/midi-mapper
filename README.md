@@ -1,30 +1,18 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+![MIDI Mapper](https://github.com/mbise1993/midi-mapper/raw/master/public/logo.png)
 
-## Getting Started
+<img alt="Build status" src="https://img.shields.io/github/workflow/status/mbise1993/midi-mapper/Build and Test">
+&nbsp;
+<img alt="Open issues" src="https://img.shields.io/github/issues/mbise1993/midi-mapper">
 
-First, run the development server:
+# Usage
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+- In the left panel, click "Select MIDI File" to pick a file to map. You can add more than one.
+- In the right panel, specify your mappings. The default text provides an example of the syntax to use.
+  - If you already have a mapping file that you want to use, you can import it by clicking on the "Import Mapping File" button.
+- In the right panel, select the lowest octave used in your MIDI file. This varies depending on the program you used to create the file, but it will usually be -1 or -2 (for example, Studio One's lowest octave is -2).
+  - If you're using a DAW, you can easily find this by looking at the piano roll.
+- Click "Map It!". Once the mapping is done, a zip file will be downloaded containing your mapped MIDI files and a text file with your mapping, which you can save for future use.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# Bugs, Questions, and Feature Requests
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+If you'd like to report a bug, ask a question, or request a new feature, please submit an issue [here](https://github.com/mbise1993/midi-mapper/issues).

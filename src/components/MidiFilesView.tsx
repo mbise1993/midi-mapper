@@ -36,7 +36,7 @@ export const MidiFilesView: React.FC<MidiFilesViewProps> = ({
     <PageSection
       title="MIDI Files"
       headerRight={
-        <FileInput inputText="" buttonText="Select MIDI Files" onChange={onMidiFilesChange} />
+        <FileInput inputText="" buttonText="Select MIDI File" onChange={onMidiFilesChange} />
       }
     >
       <List>

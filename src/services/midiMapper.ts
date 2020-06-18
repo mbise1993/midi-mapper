@@ -1,6 +1,7 @@
 import { IMappingConfig } from './mappingConfig';
 
 import { Midi, Track } from '@tonejs/midi';
+import { MidiNoteUtils } from './midiNoteUtils';
 
 type Note = Track['notes'][0];
 
@@ -9,25 +10,8 @@ interface MappedFile {
   data: Blob;
 }
 
-const PITCH_OFFSETS = {
-  C: 0,
-  'C#': 1,
-  D: 2,
-  'D#': 3,
-  E: 4,
-  F: 5,
-  'F#': 6,
-  G: 7,
-  'G#': 8,
-  A: 9,
-  'A#': 10,
-  B: 11,
-};
-
-const OCTAVE_OFFSET = 1;
-
 export class MidiMapper {
-  constructor(private readonly config: IMappingConfig) {}
+  constructor(private readonly config: IMappingConfig, private readonly octaveOffset: number) {}
 
   async mapFile(midiFile: File): Promise<MappedFile> {
     const data = await midiFile.arrayBuffer();
@@ -48,26 +32,11 @@ export class MidiMapper {
   }
 
   private mapNote(note: Note) {
-    const mapping = this.config.mappings.find(m => m.from === note.name);
+    const noteName = MidiNoteUtils.midiValueToNoteName(note.midi, this.octaveOffset);
+    const mapping = this.config.mappings.find(m => m.from === noteName);
     if (mapping) {
-      note.midi = this.noteNameToMidiValue(mapping.to);
+      note.midi = MidiNoteUtils.noteNameToMidiValue(mapping.to, this.octaveOffset);
     }
-  }
-
-  private noteNameToMidiValue(name: string): number {
-    let pitch = '';
-    let octave = 0;
-    if (name[1] === '#') {
-      pitch = name.substr(0, 2);
-      octave = parseInt(name.substr(2));
-    } else {
-      pitch = name[0];
-      octave = parseInt(name.substr(1));
-    }
-
-    const pitchOffset = PITCH_OFFSETS[pitch];
-    const adjustedOctave = octave + OCTAVE_OFFSET;
-    return adjustedOctave * 12 + pitchOffset;
   }
 
   private stripFileExtension(fileName: string): string {
