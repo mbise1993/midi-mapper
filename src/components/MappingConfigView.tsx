@@ -5,12 +5,19 @@ import {
   InputAdornment,
   MenuItem,
   TextField,
+  Tooltip,
   Typography,
   withStyles,
 } from '@material-ui/core';
+import { InfoOutlined as InfoIcon } from '@material-ui/icons';
 
 import { DEFAULT_MAPPING_TEXT } from '../services/mappingConfig';
 import { PageSection } from './PageSection';
+
+const MIDDLE_C_INFO_TEXT = `Different MIDI editors use different values 
+for middle C. As a rule of thumb, if your editor's lowest note is C-2, 
+this should be set to C3. If the lowest note is C-1, this should be set to 
+C4`;
 
 const DenseSelect = withStyles({
   root: {
@@ -63,33 +70,38 @@ export const MappingConfigView: React.FC<MappingConfigViewProps> = ({
       title="Mappings"
       headerRight={
         <Box display="flex" alignItems="center">
-          <DenseSelect
-            select
-            variant="outlined"
-            value={middleC}
-            InputProps={{
-              style: {
-                backgroundColor: 'white',
-                height: '30px',
-                paddingTop: '0px',
-                paddingBottom: '0px',
-              },
-              startAdornment: (
-                <InputAdornment disableTypography position="start">
-                  <Typography color="textSecondary">Middle C</Typography>
-                </InputAdornment>
-              ),
-            }}
-            onChange={e => onMiddleCChange(parseInt(e.target.value))}
-          >
-            <MenuItem dense value={3}>
-              C3
-            </MenuItem>
-            <MenuItem dense value={4}>
-              C4
-            </MenuItem>
-          </DenseSelect>
+          <Tooltip arrow placement="left" enterDelay={10} title={MIDDLE_C_INFO_TEXT}>
+            <InfoIcon />
+          </Tooltip>
           <Box marginLeft={1}>
+            <DenseSelect
+              select
+              variant="outlined"
+              value={middleC}
+              InputProps={{
+                style: {
+                  backgroundColor: 'white',
+                  height: '30px',
+                  paddingTop: '0px',
+                  paddingBottom: '0px',
+                },
+                startAdornment: (
+                  <InputAdornment disableTypography position="start">
+                    <Typography color="textSecondary">Middle C</Typography>
+                  </InputAdornment>
+                ),
+              }}
+              onChange={e => onMiddleCChange(parseInt(e.target.value))}
+            >
+              <MenuItem dense value={3}>
+                C3
+              </MenuItem>
+              <MenuItem dense value={4}>
+                C4
+              </MenuItem>
+            </DenseSelect>
+          </Box>
+          <Box marginLeft={2}>
             <FileInput inputText="" buttonText="Import Mapping File" onChange={onFileSelected} />
           </Box>
         </Box>
