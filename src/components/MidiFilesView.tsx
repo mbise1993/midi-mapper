@@ -10,6 +10,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import { Delete as DeleteIcon } from '@material-ui/icons';
+import { useDropzone } from 'react-dropzone';
 
 import FileInput from './FileInput';
 import { PageSection } from './PageSection';
@@ -25,6 +26,12 @@ export const MidiFilesView: React.FC<MidiFilesViewProps> = ({
   onFilesSelected,
   onDeleteClick,
 }) => {
+  const { getRootProps } = useDropzone({
+    onDropAccepted: (files: File[]) => {
+      onFilesSelected(files);
+    },
+  });
+
   const onMidiFilesChange = (e: React.FormEvent<HTMLInputElement>) => {
     const updatedFiles: File[] = [];
     for (let i = 0; i < e.currentTarget.files.length; ++i) {
@@ -38,7 +45,7 @@ export const MidiFilesView: React.FC<MidiFilesViewProps> = ({
     return (
       <Box width="100%" marginTop={12} display="flex" justifyContent="center" alignItems="center">
         <Typography variant="h6" color="textSecondary">
-          Select one or more MIDI files to map
+          Drag and drop or select MIDI files to map
         </Typography>
       </Box>
     );
@@ -66,9 +73,15 @@ export const MidiFilesView: React.FC<MidiFilesViewProps> = ({
 
   return (
     <PageSection
+      {...getRootProps()}
       title="MIDI Files"
       headerRight={
-        <FileInput inputText="" buttonText="Select MIDI File" onChange={onMidiFilesChange} />
+        <FileInput
+          multiple
+          inputText=""
+          buttonText="Select MIDI Files"
+          onChange={onMidiFilesChange}
+        />
       }
     >
       {files.length === 0 ? renderPlaceholder() : renderList()}
