@@ -4,9 +4,9 @@
 
 # Usage
 
-- In the left panel, click "Select MIDI File" to pick a file to map. You can add more than one.
+- In the left panel, select the MIDI files that you want to map by dragging and dropping or clicking the "Select MIDI Files" button.
 - In the right panel, specify your mappings. The default text provides an example of the syntax to use.
-  - If you already have a mapping file that you want to use, you can import it by clicking on the "Import Mapping File" button.
+  - If you already have a mapping file that you want to use, you can import it by dragging and dropping or clicking the "Import Mapping File" button.
 - In the right panel, select the lowest octave used in your MIDI file. This varies depending on the program you used to create the file, but it will usually be -1 or -2 (for example, Studio One's lowest octave is -2).
   - If you're using a DAW, you can easily find this by looking at the piano roll.
 - Click "Map It!". Once the mapping is done, a zip file will be downloaded containing your mapped MIDI files and a text file with your mapping, which you can save for future use.
