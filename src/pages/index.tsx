@@ -1,13 +1,5 @@
 import React from 'react';
-import {
-  Box,
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  Link,
-} from '@material-ui/core';
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@material-ui/core';
 
 import { DEFAULT_MAPPING_TEXT } from '../services/mappingConfig';
 import { MappingConfigView } from '../components/MappingConfigView';
@@ -94,16 +86,6 @@ export default function Home() {
         >
           Map It!
         </Button>
-      </Box>
-
-      <Box display="flex" justifyContent="flex-end" alignItems="center">
-        <Link
-          href="https://github.com/mbise1993/midi-mapper/issues/new"
-          target="_blank"
-          color="textPrimary"
-        >
-          Report an issue
-        </Link>
       </Box>
 
       <Dialog open={!!error} onClose={() => setError(undefined)}>
