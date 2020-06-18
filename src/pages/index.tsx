@@ -16,19 +16,19 @@ import { MidiFilesView } from '../components/MidiFilesView';
 import { Page } from '../components/Page';
 import { storageService } from '../services/storageService';
 
-const MIDDLE_C_STORAGE_KEY = 'middle-c';
+const LOWEST_OCTAVE_STORAGE_KEY = 'lowest-octave';
 
 export default function Home() {
   const [midiFiles, setMidiFiles] = React.useState<File[]>([]);
-  const [middleC, setMiddleC] = React.useState(3);
+  const [lowestOctave, setLowestOctave] = React.useState(-1);
   const [mappingText, setMappingText] = React.useState(DEFAULT_MAPPING_TEXT);
   const [isLoading, setLoading] = React.useState(false);
   const [error, setError] = React.useState<string>();
 
   React.useEffect(() => {
-    const storedMiddleC = storageService.getInt(MIDDLE_C_STORAGE_KEY);
-    if (storedMiddleC) {
-      setMiddleC(storedMiddleC);
+    const storedLowestOctave = storageService.getInt(LOWEST_OCTAVE_STORAGE_KEY);
+    if (storedLowestOctave) {
+      setLowestOctave(storedLowestOctave);
     }
   }, []);
 
@@ -41,8 +41,8 @@ export default function Home() {
     setMidiFiles(updatedFiles);
   };
 
-  const onMiddleCChange = (value: number) => {
-    setMiddleC(value);
+  const onLowestOctaveChange = (value: number) => {
+    setLowestOctave(value);
   };
 
   const onMappingTextChange = (text: string) => {
@@ -53,10 +53,10 @@ export default function Home() {
     try {
       setLoading(true);
 
-      const mappingService = new MappingService(mappingText, middleC);
+      const mappingService = new MappingService(mappingText, lowestOctave);
       await mappingService.mapAndDownload(midiFiles);
 
-      storageService.setItem(MIDDLE_C_STORAGE_KEY, middleC);
+      storageService.setItem(LOWEST_OCTAVE_STORAGE_KEY, lowestOctave);
       setError(undefined);
     } catch (e) {
       setError(e.message);
@@ -75,9 +75,9 @@ export default function Home() {
         />
         <Box marginLeft={2} flex={1} display="flex">
           <MappingConfigView
-            middleC={middleC}
+            lowestOctave={lowestOctave}
             text={mappingText}
-            onMiddleCChange={onMiddleCChange}
+            onLowestOctaveChange={onLowestOctaveChange}
             onTextChange={onMappingTextChange}
           />
         </Box>

@@ -5,17 +5,13 @@ import { MappingConfigParser } from './mappingConfig';
 import { MidiMapper } from './midiMapper';
 
 export class MappingService {
-  constructor(private readonly mappingText: string, private readonly middleC: number) {}
+  constructor(private readonly mappingText: string, private readonly lowestOctave: number) {}
 
   async mapAndDownload(files: File[]) {
     const configParser = new MappingConfigParser();
     const config = configParser.parse(this.mappingText);
 
-    if (this.middleC !== 3 && this.middleC !== 4) {
-      throw new Error('The only supported middle C options are C3 and C4');
-    }
-
-    const mapper = new MidiMapper(config, this.middleC === 3 ? 1 : 0);
+    const mapper = new MidiMapper(config, Math.abs(this.lowestOctave));
     const mappedFiles = await mapper.mapFiles(files);
 
     const zip = new JSZip();

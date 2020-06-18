@@ -14,10 +14,8 @@ import { InfoOutlined as InfoIcon } from '@material-ui/icons';
 import { DEFAULT_MAPPING_TEXT } from '../services/mappingConfig';
 import { PageSection } from './PageSection';
 
-const MIDDLE_C_INFO_TEXT = `Different MIDI editors use different values 
-for middle C. As a rule of thumb, if your editor's lowest note is C-2, 
-this should be set to C3. If the lowest note is C-1, this should be set to 
-C4`;
+const LOWEST_OCTAVE_INFO_TEXT = `Set this to the lowest octave that your MIDI editor uses 
+to ensure that the notes are mapped correctly`;
 
 const DenseSelect = withStyles({
   root: {
@@ -45,16 +43,16 @@ const MultilineInput = withStyles({
 })(TextField);
 
 interface MappingConfigViewProps {
-  middleC: number;
+  lowestOctave: number;
   text: string;
-  onMiddleCChange(value: number): void;
+  onLowestOctaveChange(value: number): void;
   onTextChange(text: string): void;
 }
 
 export const MappingConfigView: React.FC<MappingConfigViewProps> = ({
-  middleC,
+  lowestOctave,
   text,
-  onMiddleCChange,
+  onLowestOctaveChange,
   onTextChange,
 }) => {
   const onFileSelected = async (e: React.FormEvent<HTMLInputElement>) => {
@@ -70,14 +68,14 @@ export const MappingConfigView: React.FC<MappingConfigViewProps> = ({
       title="Mappings"
       headerRight={
         <Box display="flex" alignItems="center">
-          <Tooltip arrow placement="left" enterDelay={10} title={MIDDLE_C_INFO_TEXT}>
+          <Tooltip arrow placement="left" enterDelay={10} title={LOWEST_OCTAVE_INFO_TEXT}>
             <InfoIcon />
           </Tooltip>
           <Box marginLeft={1}>
             <DenseSelect
               select
               variant="outlined"
-              value={middleC}
+              value={lowestOctave}
               InputProps={{
                 style: {
                   backgroundColor: 'white',
@@ -87,17 +85,20 @@ export const MappingConfigView: React.FC<MappingConfigViewProps> = ({
                 },
                 startAdornment: (
                   <InputAdornment disableTypography position="start">
-                    <Typography color="textSecondary">Middle C</Typography>
+                    <Typography color="textSecondary">Lowest octave</Typography>
                   </InputAdornment>
                 ),
               }}
-              onChange={e => onMiddleCChange(parseInt(e.target.value))}
+              onChange={e => onLowestOctaveChange(parseInt(e.target.value))}
             >
-              <MenuItem dense value={3}>
-                C3
+              <MenuItem dense value={-2}>
+                -2
               </MenuItem>
-              <MenuItem dense value={4}>
-                C4
+              <MenuItem dense value={-1}>
+                -1
+              </MenuItem>
+              <MenuItem dense value={0}>
+                0
               </MenuItem>
             </DenseSelect>
           </Box>
