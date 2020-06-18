@@ -14,6 +14,9 @@ import { MappingConfigView } from '../components/MappingConfigView';
 import { MappingService } from '../services/mappingService';
 import { MidiFilesView } from '../components/MidiFilesView';
 import { Page } from '../components/Page';
+import { storageService } from '../services/storageService';
+
+const MIDDLE_C_STORAGE_KEY = 'middle-c';
 
 export default function Home() {
   const [midiFiles, setMidiFiles] = React.useState<File[]>([]);
@@ -21,6 +24,13 @@ export default function Home() {
   const [mappingText, setMappingText] = React.useState(DEFAULT_MAPPING_TEXT);
   const [isLoading, setLoading] = React.useState(false);
   const [error, setError] = React.useState<string>();
+
+  React.useEffect(() => {
+    const storedMiddleC = storageService.getInt(MIDDLE_C_STORAGE_KEY);
+    if (storedMiddleC) {
+      setMiddleC(storedMiddleC);
+    }
+  }, []);
 
   const onMidiFilesSelected = (files: File[]) => {
     setMidiFiles([...midiFiles, ...files]);
@@ -31,6 +41,14 @@ export default function Home() {
     setMidiFiles(updatedFiles);
   };
 
+  const onMiddleCChange = (value: number) => {
+    setMiddleC(value);
+  };
+
+  const onMappingTextChange = (text: string) => {
+    setMappingText(text);
+  };
+
   const onMapClick = async () => {
     try {
       setLoading(true);
@@ -38,6 +56,7 @@ export default function Home() {
       const mappingService = new MappingService(mappingText, middleC);
       await mappingService.mapAndDownload(midiFiles);
 
+      storageService.setItem(MIDDLE_C_STORAGE_KEY, middleC);
       setError(undefined);
     } catch (e) {
       setError(e.message);
@@ -58,8 +77,8 @@ export default function Home() {
           <MappingConfigView
             middleC={middleC}
             text={mappingText}
-            onMiddleCChange={value => setMiddleC(value)}
-            onTextChange={text => setMappingText(text)}
+            onMiddleCChange={onMiddleCChange}
+            onTextChange={onMappingTextChange}
           />
         </Box>
       </Box>
