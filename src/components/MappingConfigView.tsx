@@ -10,6 +10,7 @@ import {
   withStyles,
 } from '@material-ui/core';
 import { InfoOutlined as InfoIcon } from '@material-ui/icons';
+import { useDropzone } from 'react-dropzone';
 
 import { DEFAULT_MAPPING_TEXT } from '../services/mappingConfig';
 import { PageSection } from './PageSection';
@@ -55,6 +56,13 @@ export const MappingConfigView: React.FC<MappingConfigViewProps> = ({
   onLowestOctaveChange,
   onTextChange,
 }) => {
+  const { getRootProps } = useDropzone({
+    accept: 'text/plain',
+    onDropAccepted: (files: File[]) => {
+      files[0].text().then(onTextChange);
+    },
+  });
+
   const onFileSelected = async (e: React.FormEvent<HTMLInputElement>) => {
     const files = e.currentTarget.files;
     if (files.length > 0) {
@@ -65,6 +73,7 @@ export const MappingConfigView: React.FC<MappingConfigViewProps> = ({
 
   return (
     <PageSection
+      {...getRootProps()}
       title="Mappings"
       headerRight={
         <Box display="flex" alignItems="center">
