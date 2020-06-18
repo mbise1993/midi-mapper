@@ -68,4 +68,13 @@ describe(MidiMapper.name, () => {
       'D3',
     ]);
   });
+
+  it('returns the correct file name', async () => {
+    const file = loadMidiFile('test-file.mid');
+    const mapper = new MidiMapper(config);
+
+    const output = await mapper.mapFile(file);
+
+    expect(output.name).toMatch('test-file - Mapped.mid');
+  });
 });

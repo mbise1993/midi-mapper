@@ -38,7 +38,7 @@ export class MidiMapper {
     });
 
     return {
-      name: `${midiFile.name} - Mapped.mid`,
+      name: `${this.stripFileExtension(midiFile.name)} - Mapped.mid`,
       data: new Blob([midi.toArray()]),
     };
   }
@@ -68,5 +68,10 @@ export class MidiMapper {
     const pitchOffset = PITCH_OFFSETS[pitch];
     const adjustedOctave = octave + OCTAVE_OFFSET;
     return adjustedOctave * 12 + pitchOffset;
+  }
+
+  private stripFileExtension(fileName: string): string {
+    const index = fileName.lastIndexOf('.');
+    return index > -1 ? fileName.substring(0, index) : fileName;
   }
 }
