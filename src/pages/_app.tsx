@@ -46,7 +46,7 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
             <img src="/logo.png" alt="MIDI Mapper" height="40px" />
             <Box display="flex" alignItems="center">
               <Link
-                href="https://github.com/mbise1993/midi-mapper"
+                href="https://github.com/mbise1993/midi-mapper/blob/master/README.md"
                 target="_blank"
                 color="textPrimary"
                 title="View on GitHub"
