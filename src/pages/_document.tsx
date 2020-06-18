@@ -11,7 +11,7 @@ export default class MyDocument extends Document {
         <Head>
           <meta name="theme-color" content={theme.palette.primary.main} />
         </Head>
-        <body style={{ backgroundColor: theme.palette.primary.main }}>
+        <body style={{ backgroundColor: theme.palette.background.default }}>
           <Main />
           <NextScript />
         </body>

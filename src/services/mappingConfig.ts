@@ -1,3 +1,9 @@
+export const DEFAULT_MAPPING_TEXT = `Name: This is an example mapping
+
+C1 to D0
+G#1 to A3
+B5 to F-1`;
+
 export interface IMapping {
   from: string;
   to: string;

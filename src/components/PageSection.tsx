@@ -18,6 +18,8 @@ export const PageSection: React.FC<PageSectionProps> = ({
     <Box
       bgcolor="white"
       borderRadius={4}
+      borderColor={theme.palette.grey[600]}
+      border={0.4}
       overflow="auto"
       flex={1}
       display="flex"
@@ -25,7 +27,7 @@ export const PageSection: React.FC<PageSectionProps> = ({
       {...rest}
     >
       <Box
-        bgcolor={theme.palette.grey[200]}
+        bgcolor={theme.palette.primary.main}
         padding={1}
         display="flex"
         justifyContent="space-between"

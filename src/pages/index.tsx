@@ -1,6 +1,15 @@
 import React from 'react';
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@material-ui/core';
+import {
+  Box,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Link,
+} from '@material-ui/core';
 
+import { DEFAULT_MAPPING_TEXT } from '../services/mappingConfig';
 import { MappingConfigView } from '../components/MappingConfigView';
 import { MappingService } from '../services/mappingService';
 import { MidiFilesView } from '../components/MidiFilesView';
@@ -8,7 +17,7 @@ import { Page } from '../components/Page';
 
 export default function Home() {
   const [midiFiles, setMidiFiles] = React.useState<File[]>([]);
-  const [mappingText, setMappingText] = React.useState('');
+  const [mappingText, setMappingText] = React.useState(DEFAULT_MAPPING_TEXT);
   const [isLoading, setLoading] = React.useState(false);
   const [error, setError] = React.useState<string>();
 
@@ -49,16 +58,27 @@ export default function Home() {
         </Box>
       </Box>
 
-      <Box marginTop={4} marginBottom={2} display="flex" justifyContent="center">
+      <Box marginTop={2} display="flex" justifyContent="center">
         <Button
           style={{ width: '200px' }}
           variant="contained"
+          color="secondary"
           size="large"
-          disabled={isLoading}
+          disabled={isLoading || midiFiles.length === 0}
           onClick={onMapClick}
         >
           Map It!
         </Button>
+      </Box>
+
+      <Box display="flex" justifyContent="flex-end" alignItems="center">
+        <Link
+          href="https://github.com/mbise1993/midi-mapper/issues/new"
+          target="_blank"
+          color="textPrimary"
+        >
+          Report an issue
+        </Link>
       </Box>
 
       <Dialog open={!!error} onClose={() => setError(undefined)}>

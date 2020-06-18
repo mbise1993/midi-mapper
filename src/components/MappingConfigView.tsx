@@ -1,14 +1,25 @@
 import FileInput from './FileInput';
 import React from 'react';
-import { TextField } from '@material-ui/core';
+import { TextField, withStyles } from '@material-ui/core';
 
+import { DEFAULT_MAPPING_TEXT } from '../services/mappingConfig';
 import { PageSection } from './PageSection';
 
-const PLACEHOLDER_TEXT = `Name: This is an example mapping
-
-C1 to D0
-G#1 to A3
-B5 to F-1`;
+const MultilineTextField = withStyles({
+  root: {
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderWidth: 0,
+      },
+      '&:hover fieldset': {
+        borderWidth: 0,
+      },
+      '&.Mui-focused fieldset': {
+        borderWidth: 0,
+      },
+    },
+  },
+})(TextField);
 
 interface MappingConfigViewProps {
   text: string;
@@ -31,11 +42,11 @@ export const MappingConfigView: React.FC<MappingConfigViewProps> = ({ text, onTe
         <FileInput inputText="" buttonText="Import Mapping File" onChange={onFileSelected} />
       }
     >
-      <TextField
+      <MultilineTextField
         multiline
         variant="outlined"
-        rows={30}
-        placeholder={PLACEHOLDER_TEXT}
+        rows={20}
+        placeholder={DEFAULT_MAPPING_TEXT}
         value={text}
         onChange={e => onTextChange(e.target.value)}
       />
