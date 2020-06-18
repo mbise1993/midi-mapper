@@ -102,7 +102,7 @@ export const MappingConfigView: React.FC<MappingConfigViewProps> = ({
               </MenuItem>
             </DenseSelect>
           </Box>
-          <Box marginLeft={2}>
+          <Box marginLeft={1}>
             <FileInput inputText="" buttonText="Import Mapping File" onChange={onFileSelected} />
           </Box>
         </Box>

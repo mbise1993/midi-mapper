@@ -1,13 +1,15 @@
 import React from 'react';
-import { Delete as DeleteIcon } from '@material-ui/icons';
 import {
+  Box,
   Divider,
   IconButton,
   List,
   ListItem,
   ListItemSecondaryAction,
   ListItemText,
+  Typography,
 } from '@material-ui/core';
+import { Delete as DeleteIcon } from '@material-ui/icons';
 
 import FileInput from './FileInput';
 import { PageSection } from './PageSection';
@@ -32,13 +34,18 @@ export const MidiFilesView: React.FC<MidiFilesViewProps> = ({
     onFilesSelected(updatedFiles);
   };
 
-  return (
-    <PageSection
-      title="MIDI Files"
-      headerRight={
-        <FileInput inputText="" buttonText="Select MIDI File" onChange={onMidiFilesChange} />
-      }
-    >
+  const renderPlaceholder = () => {
+    return (
+      <Box width="100%" marginTop={12} display="flex" justifyContent="center" alignItems="center">
+        <Typography variant="h6" color="textSecondary">
+          Select one or more MIDI files to map
+        </Typography>
+      </Box>
+    );
+  };
+
+  const renderList = () => {
+    return (
       <List>
         {files.map(file => (
           <>
@@ -54,6 +61,17 @@ export const MidiFilesView: React.FC<MidiFilesViewProps> = ({
           </>
         ))}
       </List>
+    );
+  };
+
+  return (
+    <PageSection
+      title="MIDI Files"
+      headerRight={
+        <FileInput inputText="" buttonText="Select MIDI File" onChange={onMidiFilesChange} />
+      }
+    >
+      {files.length === 0 ? renderPlaceholder() : renderList()}
     </PageSection>
   );
 };
