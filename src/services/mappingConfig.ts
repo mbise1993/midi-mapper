@@ -1,4 +1,4 @@
-export const DEFAULT_MAPPING_TEXT = `Name: This is an example mapping
+export const DEFAULT_MAPPING_TEXT = `Name: Example mapping
 
 C1 to D0
 G#1 to A3
