@@ -48,7 +48,7 @@ const verifyOutput = async (midiData: Blob, expectedSequence: string[]) => {
 describe(MidiMapper.name, () => {
   it('correctly maps the notes', async () => {
     const file = loadMidiFile('test-file.mid');
-    const mapper = new MidiMapper(config);
+    const mapper = new MidiMapper(config, 1);
 
     const output = await mapper.mapFile(file);
 
@@ -71,7 +71,7 @@ describe(MidiMapper.name, () => {
 
   it('returns the correct file name', async () => {
     const file = loadMidiFile('test-file.mid');
-    const mapper = new MidiMapper(config);
+    const mapper = new MidiMapper(config, 1);
 
     const output = await mapper.mapFile(file);
 

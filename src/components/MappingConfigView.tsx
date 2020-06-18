@@ -1,11 +1,27 @@
 import FileInput from './FileInput';
 import React from 'react';
-import { TextField, withStyles } from '@material-ui/core';
+import {
+  Box,
+  InputAdornment,
+  MenuItem,
+  TextField,
+  Typography,
+  withStyles,
+} from '@material-ui/core';
 
 import { DEFAULT_MAPPING_TEXT } from '../services/mappingConfig';
 import { PageSection } from './PageSection';
 
-const MultilineTextField = withStyles({
+const DenseSelect = withStyles({
+  root: {
+    '& .MuiOutlinedInput-input': {
+      paddingTop: '0px',
+      paddingBottom: '0px',
+    },
+  },
+})(TextField);
+
+const MultilineInput = withStyles({
   root: {
     '& .MuiOutlinedInput-root': {
       '& fieldset': {
@@ -22,11 +38,18 @@ const MultilineTextField = withStyles({
 })(TextField);
 
 interface MappingConfigViewProps {
+  middleC: number;
   text: string;
+  onMiddleCChange(value: number): void;
   onTextChange(text: string): void;
 }
 
-export const MappingConfigView: React.FC<MappingConfigViewProps> = ({ text, onTextChange }) => {
+export const MappingConfigView: React.FC<MappingConfigViewProps> = ({
+  middleC,
+  text,
+  onMiddleCChange,
+  onTextChange,
+}) => {
   const onFileSelected = async (e: React.FormEvent<HTMLInputElement>) => {
     const files = e.currentTarget.files;
     if (files.length > 0) {
@@ -39,10 +62,40 @@ export const MappingConfigView: React.FC<MappingConfigViewProps> = ({ text, onTe
     <PageSection
       title="Mappings"
       headerRight={
-        <FileInput inputText="" buttonText="Import Mapping File" onChange={onFileSelected} />
+        <Box display="flex" alignItems="center">
+          <DenseSelect
+            select
+            variant="outlined"
+            value={middleC}
+            InputProps={{
+              style: {
+                backgroundColor: 'white',
+                height: '30px',
+                paddingTop: '0px',
+                paddingBottom: '0px',
+              },
+              startAdornment: (
+                <InputAdornment disableTypography position="start">
+                  <Typography color="textSecondary">Middle C</Typography>
+                </InputAdornment>
+              ),
+            }}
+            onChange={e => onMiddleCChange(parseInt(e.target.value))}
+          >
+            <MenuItem dense value={3}>
+              C3
+            </MenuItem>
+            <MenuItem dense value={4}>
+              C4
+            </MenuItem>
+          </DenseSelect>
+          <Box marginLeft={1}>
+            <FileInput inputText="" buttonText="Import Mapping File" onChange={onFileSelected} />
+          </Box>
+        </Box>
       }
     >
-      <MultilineTextField
+      <MultilineInput
         multiline
         variant="outlined"
         rows={20}

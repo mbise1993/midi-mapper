@@ -17,6 +17,7 @@ import { Page } from '../components/Page';
 
 export default function Home() {
   const [midiFiles, setMidiFiles] = React.useState<File[]>([]);
+  const [middleC, setMiddleC] = React.useState(3);
   const [mappingText, setMappingText] = React.useState(DEFAULT_MAPPING_TEXT);
   const [isLoading, setLoading] = React.useState(false);
   const [error, setError] = React.useState<string>();
@@ -34,7 +35,7 @@ export default function Home() {
     try {
       setLoading(true);
 
-      const mappingService = new MappingService(mappingText);
+      const mappingService = new MappingService(mappingText, middleC);
       await mappingService.mapAndDownload(midiFiles);
 
       setError(undefined);
@@ -54,7 +55,12 @@ export default function Home() {
           onDeleteClick={onFileDeleteClick}
         />
         <Box marginLeft={2} flex={1} display="flex">
-          <MappingConfigView text={mappingText} onTextChange={text => setMappingText(text)} />
+          <MappingConfigView
+            middleC={middleC}
+            text={mappingText}
+            onMiddleCChange={value => setMiddleC(value)}
+            onTextChange={text => setMappingText(text)}
+          />
         </Box>
       </Box>
 

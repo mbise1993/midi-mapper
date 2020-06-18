@@ -24,10 +24,8 @@ const PITCH_OFFSETS = {
   B: 11,
 };
 
-const OCTAVE_OFFSET = 1;
-
 export class MidiMapper {
-  constructor(private readonly config: IMappingConfig) {}
+  constructor(private readonly config: IMappingConfig, private readonly octaveOffset: number) {}
 
   async mapFile(midiFile: File): Promise<MappedFile> {
     const data = await midiFile.arrayBuffer();
@@ -66,7 +64,7 @@ export class MidiMapper {
     }
 
     const pitchOffset = PITCH_OFFSETS[pitch];
-    const adjustedOctave = octave + OCTAVE_OFFSET;
+    const adjustedOctave = octave + this.octaveOffset;
     return adjustedOctave * 12 + pitchOffset;
   }
 

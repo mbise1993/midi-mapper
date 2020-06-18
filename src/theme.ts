@@ -15,9 +15,9 @@ const theme = createMuiTheme({
     background: {
       default: '#eeeeee',
     },
-    text: {
-      secondary: '#ffffff',
-    },
+    // text: {
+    //   secondary: '#ffffff',
+    // },
   },
   typography: {
     button: {
