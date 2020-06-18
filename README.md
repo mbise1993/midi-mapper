@@ -1,8 +1,6 @@
 ![MIDI Mapper](https://github.com/mbise1993/midi-mapper/raw/master/public/logo.png)
 
-<img alt="Build status" src="https://img.shields.io/github/workflow/status/mbise1993/midi-mapper/Build and Test">
-&nbsp;
-<img alt="Open issues" src="https://img.shields.io/github/issues/mbise1993/midi-mapper">
+<img alt="Build status" src="https://img.shields.io/github/workflow/status/mbise1993/midi-mapper/Build and Test"> <img alt="Open issues" src="https://img.shields.io/github/issues/mbise1993/midi-mapper">
 
 # Usage
 
