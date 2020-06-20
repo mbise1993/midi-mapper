@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Box,
   Button,
   Dialog,
   DialogActions,
@@ -19,15 +18,9 @@ import { storageService } from '../services/storageService';
 
 const LOWEST_OCTAVE_STORAGE_KEY = 'lowest-octave';
 
-const RootGrid = withStyles({
-  root: {
-    flex: 1,
-  },
-})(Grid);
-
 const SectionGridItem = withStyles({
   root: {
-    minHeight: '500px',
+    minHeight: '580px',
   },
 })(Grid);
 
@@ -80,7 +73,7 @@ export default function Home() {
 
   return (
     <Page>
-      <RootGrid container spacing={2} justify="center">
+      <Grid container spacing={2} justify="center">
         <SectionGridItem item xs={12} md={6}>
           <MidiFilesView
             files={midiFiles}
@@ -96,20 +89,19 @@ export default function Home() {
             onTextChange={onMappingTextChange}
           />
         </SectionGridItem>
-      </RootGrid>
-
-      <Box width="100%" marginTop={2} display="flex" justifyContent="center">
-        <Button
-          style={{ width: '200px' }}
-          variant="contained"
-          color="secondary"
-          size="large"
-          disabled={isLoading || midiFiles.length === 0}
-          onClick={onMapClick}
-        >
-          Map It!
-        </Button>
-      </Box>
+        <Grid item>
+          <Button
+            style={{ width: '200px' }}
+            variant="contained"
+            color="secondary"
+            size="large"
+            disabled={isLoading || midiFiles.length === 0}
+            onClick={onMapClick}
+          >
+            Map It!
+          </Button>
+        </Grid>
+      </Grid>
 
       <Dialog open={!!error} onClose={() => setError(undefined)}>
         <DialogTitle>Mapping Error :(</DialogTitle>
