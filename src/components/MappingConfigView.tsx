@@ -75,6 +75,7 @@ export const MappingConfigView: React.FC<MappingConfigViewProps> = ({
     <PageSection
       {...getRootProps()}
       title="Mappings"
+      height="100%"
       headerRight={
         <Box display="flex" alignItems="center">
           <Tooltip arrow placement="left" enterDelay={10} title={LOWEST_OCTAVE_INFO_TEXT}>
@@ -112,7 +113,7 @@ export const MappingConfigView: React.FC<MappingConfigViewProps> = ({
             </DenseSelect>
           </Box>
           <Box marginLeft={1}>
-            <FileInput inputText="" buttonText="Import Mapping File" onChange={onFileSelected} />
+            <FileInput inputText="" buttonText="Import Mappings" onChange={onFileSelected} />
           </Box>
         </Box>
       }
