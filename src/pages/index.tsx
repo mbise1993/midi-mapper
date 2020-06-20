@@ -1,5 +1,14 @@
 import React from 'react';
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@material-ui/core';
+import {
+  Box,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Grid,
+  withStyles,
+} from '@material-ui/core';
 
 import { DEFAULT_MAPPING_TEXT } from '../services/mappingConfig';
 import { MappingConfigView } from '../components/MappingConfigView';
@@ -9,6 +18,18 @@ import { Page } from '../components/Page';
 import { storageService } from '../services/storageService';
 
 const LOWEST_OCTAVE_STORAGE_KEY = 'lowest-octave';
+
+const RootGrid = withStyles({
+  root: {
+    flex: 1,
+  },
+})(Grid);
+
+const SectionGridItem = withStyles({
+  root: {
+    minHeight: '500px',
+  },
+})(Grid);
 
 export default function Home() {
   const [midiFiles, setMidiFiles] = React.useState<File[]>([]);
@@ -59,23 +80,25 @@ export default function Home() {
 
   return (
     <Page>
-      <Box flex={1} display="flex">
-        <MidiFilesView
-          files={midiFiles}
-          onFilesSelected={onMidiFilesSelected}
-          onDeleteClick={onFileDeleteClick}
-        />
-        <Box marginLeft={2} flex={1} display="flex">
+      <RootGrid container spacing={2} justify="center">
+        <SectionGridItem item xs={12} md={6}>
+          <MidiFilesView
+            files={midiFiles}
+            onFilesSelected={onMidiFilesSelected}
+            onDeleteClick={onFileDeleteClick}
+          />
+        </SectionGridItem>
+        <SectionGridItem item xs={12} md={6}>
           <MappingConfigView
             lowestOctave={lowestOctave}
             text={mappingText}
             onLowestOctaveChange={onLowestOctaveChange}
             onTextChange={onMappingTextChange}
           />
-        </Box>
-      </Box>
+        </SectionGridItem>
+      </RootGrid>
 
-      <Box marginTop={2} display="flex" justifyContent="center">
+      <Box width="100%" marginTop={2} display="flex" justifyContent="center">
         <Button
           style={{ width: '200px' }}
           variant="contained"

@@ -75,6 +75,7 @@ export const MidiFilesView: React.FC<MidiFilesViewProps> = ({
     <PageSection
       {...getRootProps()}
       title="MIDI Files"
+      height="100%"
       headerRight={
         <FileInput
           multiple

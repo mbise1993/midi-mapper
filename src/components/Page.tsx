@@ -7,6 +7,7 @@ export const Page: React.FC<PageProps> = ({ children, ...rest }) => {
   const style: React.CSSProperties = {
     height: 'calc(100vh - 64px)',
     padding: '16px',
+    overflow: 'auto',
     display: 'flex',
     flexDirection: 'column',
   };
