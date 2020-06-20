@@ -8,12 +8,19 @@ import {
   ListItemSecondaryAction,
   ListItemText,
   Typography,
+  withStyles,
 } from '@material-ui/core';
 import { Delete as DeleteIcon } from '@material-ui/icons';
 import { useDropzone } from 'react-dropzone';
 
 import FileInput from './FileInput';
 import { PageSection } from './PageSection';
+
+const PlaceholderText = withStyles({
+  root: {
+    textAlign: 'center',
+  },
+})(Typography);
 
 interface MidiFilesViewProps {
   files: File[];
@@ -43,10 +50,17 @@ export const MidiFilesView: React.FC<MidiFilesViewProps> = ({
 
   const renderPlaceholder = () => {
     return (
-      <Box width="100%" marginTop={12} display="flex" justifyContent="center" alignItems="center">
-        <Typography variant="h6" color="textSecondary">
+      <Box
+        width="100%"
+        marginTop={12}
+        padding={2}
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <PlaceholderText variant="h6" color="textSecondary">
           Drag and drop or select MIDI files to map
-        </Typography>
+        </PlaceholderText>
       </Box>
     );
   };
