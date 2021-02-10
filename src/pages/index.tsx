@@ -1,13 +1,4 @@
 import React from 'react';
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  Grid,
-  withStyles,
-} from '@material-ui/core';
 
 import { DEFAULT_MAPPING_TEXT } from '../services/mappingConfig';
 import { MappingConfigView } from '../components/MappingConfigView';
@@ -18,13 +9,7 @@ import { storageService } from '../services/storageService';
 
 const LOWEST_OCTAVE_STORAGE_KEY = 'lowest-octave';
 
-const SectionGridItem = withStyles({
-  root: {
-    minHeight: '580px',
-  },
-})(Grid);
-
-export default function Home() {
+export default function Index() {
   const [midiFiles, setMidiFiles] = React.useState<File[]>([]);
   const [lowestOctave, setLowestOctave] = React.useState(-1);
   const [mappingText, setMappingText] = React.useState(DEFAULT_MAPPING_TEXT);
@@ -73,35 +58,24 @@ export default function Home() {
 
   return (
     <Page>
-      <Grid container spacing={2} justify="center">
-        <SectionGridItem item xs={12} md={6}>
-          <MidiFilesView
-            files={midiFiles}
-            onFilesSelected={onMidiFilesSelected}
-            onDeleteClick={onFileDeleteClick}
-          />
-        </SectionGridItem>
-        <SectionGridItem item xs={12} md={6}>
-          <MappingConfigView
-            lowestOctave={lowestOctave}
-            text={mappingText}
-            onLowestOctaveChange={onLowestOctaveChange}
-            onTextChange={onMappingTextChange}
-          />
-        </SectionGridItem>
-        <Grid item>
-          <Button
-            style={{ width: '200px' }}
-            variant="contained"
-            color="secondary"
-            size="large"
-            disabled={isLoading || midiFiles.length === 0}
-            onClick={onMapClick}
-          >
-            Map It!
-          </Button>
-        </Grid>
-      </Grid>
+      <MidiFilesView
+        files={midiFiles}
+        onFilesSelected={onMidiFilesSelected}
+        onDeleteClick={onFileDeleteClick}
+      />
+      <MappingConfigView
+        lowestOctave={lowestOctave}
+        text={mappingText}
+        onLowestOctaveChange={onLowestOctaveChange}
+        onTextChange={onMappingTextChange}
+      />
+      <button
+        className="mm-btn-primary"
+        disabled={isLoading || midiFiles.length === 0}
+        onClick={onMapClick}
+      >
+        Map It!
+      </button>
 
       <Dialog open={!!error} onClose={() => setError(undefined)}>
         <DialogTitle>Mapping Error :(</DialogTitle>

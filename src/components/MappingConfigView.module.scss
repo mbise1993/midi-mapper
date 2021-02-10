@@ -1,0 +1,10 @@
+@import "tokens";
+
+.headerRightContainer {
+  display: flex;
+  align-items: center;
+
+  & > * {
+    margin-left: $space-sm;
+  }
+}

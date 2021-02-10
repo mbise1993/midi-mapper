@@ -1,7 +1,7 @@
 import { Midi } from '@tonejs/midi';
 
 import { IMappingConfig } from './mappingConfig';
-import { loadMidiFile } from '../testing/loadResource';
+import { loadMidiFile } from '../test/loadResource';
 import { MidiMapper } from './midiMapper';
 import { MidiNoteUtils } from './midiNoteUtils';
 

@@ -1,0 +1,12 @@
+@import "./tokens.scs";
+
+.mm-list {
+  list-style: none;
+}
+
+.mm-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $space-sm;
+}

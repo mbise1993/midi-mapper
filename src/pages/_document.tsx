@@ -1,17 +1,19 @@
-import Document, { DocumentContext, Head, Html, Main, NextScript } from 'next/document';
+import Document, { Head, Html, Main, NextScript } from 'next/document';
 import React from 'react';
-import { ServerStyleSheets } from '@material-ui/core';
-
-import theme from '../theme';
 
 export default class MyDocument extends Document {
   render() {
     return (
       <Html lang="en">
         <Head>
-          <meta name="theme-color" content={theme.palette.primary.main} />
+          <title>MIDI Mapper</title>
+          <link rel="icon" href="/favicon.ico" />
+          <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+          <link rel="manifest" href="/site.webmanifest" />
+          <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
+          <meta name="theme-color" content="#fff" />
         </Head>
-        <body style={{ backgroundColor: theme.palette.background.default }}>
+        <body>
           <Main />
           <NextScript />
         </body>
@@ -19,20 +21,3 @@ export default class MyDocument extends Document {
     );
   }
 }
-
-MyDocument.getInitialProps = async (ctx: DocumentContext) => {
-  const sheets = new ServerStyleSheets();
-  const originalRenderPage = ctx.renderPage;
-
-  ctx.renderPage = () =>
-    originalRenderPage({
-      enhanceApp: App => props => sheets.collect(<App {...props} />),
-    });
-
-  const initialProps = await Document.getInitialProps(ctx);
-
-  return {
-    ...initialProps,
-    styles: [...React.Children.toArray(initialProps.styles), sheets.getStyleElement()],
-  };
-};

@@ -1,26 +1,11 @@
 import React from 'react';
-import {
-  Box,
-  Divider,
-  IconButton,
-  List,
-  ListItem,
-  ListItemSecondaryAction,
-  ListItemText,
-  Typography,
-  withStyles,
-} from '@material-ui/core';
-import { Delete as DeleteIcon } from '@material-ui/icons';
+import { FaTrash as DeleteIcon } from 'react-icons/fa';
 import { useDropzone } from 'react-dropzone';
 
 import FileInput from './FileInput';
 import { PageSection } from './PageSection';
 
-const PlaceholderText = withStyles({
-  root: {
-    textAlign: 'center',
-  },
-})(Typography);
+import styles from './MidiFilesView.module.scss';
 
 interface MidiFilesViewProps {
   files: File[];
@@ -50,38 +35,24 @@ export const MidiFilesView: React.FC<MidiFilesViewProps> = ({
 
   const renderPlaceholder = () => {
     return (
-      <Box
-        width="100%"
-        marginTop={12}
-        padding={2}
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-      >
-        <PlaceholderText variant="h6" color="textSecondary">
-          Drag and drop or select MIDI files to map
-        </PlaceholderText>
-      </Box>
+      <div className={styles.placeholderContainer}>
+        <span>Drag and drop or select MIDI files to map</span>
+      </div>
     );
   };
 
   const renderList = () => {
     return (
-      <List>
+      <ul className="mm-list">
         {files.map(file => (
-          <>
-            <ListItem key={file.name}>
-              <ListItemText primary={file.name} />
-              <ListItemSecondaryAction>
-                <IconButton onClick={() => onDeleteClick(file)}>
-                  <DeleteIcon />
-                </IconButton>
-              </ListItemSecondaryAction>
-            </ListItem>
-            <Divider />
-          </>
+          <li key={file.name} className="mm-list-item">
+            <span>{file.name}</span>
+            <button className="mm-btn-icon" onClick={() => onDeleteClick(file)}>
+              <DeleteIcon />
+            </button>
+          </li>
         ))}
-      </List>
+      </ul>
     );
   };
 
@@ -89,7 +60,6 @@ export const MidiFilesView: React.FC<MidiFilesViewProps> = ({
     <PageSection
       {...getRootProps()}
       title="MIDI Files"
-      height="100%"
       headerRight={
         <FileInput
           multiple

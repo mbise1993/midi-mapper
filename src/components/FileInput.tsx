@@ -1,11 +1,11 @@
 import React from 'react';
-import { Box, Button, ButtonProps, Typography } from '@material-ui/core';
+
+import styles from './FileInput.module.scss';
 
 interface FileInputProps {
   inputText?: string;
   buttonText?: string;
-  buttonVariant?: ButtonProps['variant'];
-  buttonColor?: ButtonProps['color'];
+  buttonClass?: string;
   multiple?: boolean;
   onChange(e: React.FormEvent<HTMLInputElement>): void;
 }
@@ -13,18 +13,17 @@ interface FileInputProps {
 export default function FileInput({
   inputText = 'Choose file...',
   buttonText = 'Browse',
-  buttonVariant = 'contained',
-  buttonColor,
+  buttonClass = 'mm-btn-text',
   multiple = false,
   onChange,
 }: FileInputProps) {
   return (
-    <Box display="flex" alignItems="center">
-      <Typography>{inputText}</Typography>
-      <Button component="label" size="small" variant={buttonVariant} color={buttonColor}>
+    <div className={styles.container}>
+      <span>{inputText}</span>
+      <button className={buttonClass}>
         {buttonText}
         <input hidden multiple={multiple} type="file" onChange={onChange} />
-      </Button>
-    </Box>
+      </button>
+    </div>
   );
 }

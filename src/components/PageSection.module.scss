@@ -1,0 +1,17 @@
+.sectionContainer {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: auto;
+  background-color: white;
+  border: 0.4px solid gray;
+  border-radius: 4;
+}
+
+.headerContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
+  background-color: red;
+}
