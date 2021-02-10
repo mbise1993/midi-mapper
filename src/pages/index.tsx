@@ -77,13 +77,15 @@ export default function Index() {
         Map It!
       </button>
 
-      <Dialog open={!!error} onClose={() => setError(undefined)}>
-        <DialogTitle>Mapping Error :(</DialogTitle>
-        <DialogContent>{error}</DialogContent>
-        <DialogActions>
-          <Button onClick={() => setError(undefined)}>OK</Button>
-        </DialogActions>
-      </Dialog>
+      {Boolean(error) && (
+        <div className="mm-dialog">
+          <h2>Mapping Error :(</h2>
+          <div className="mm-dialog-content">{error}</div>
+          <button className="mm-btn-default" onClick={() => setError(undefined)}>
+            OK
+          </button>
+        </div>
+      )}
     </Page>
   );
 }
