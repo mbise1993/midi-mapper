@@ -1,4 +1,4 @@
-import { IMappingConfig } from './mappingConfig';
+import { MappingConfig } from './mappingConfig';
 
 import { Midi, Track } from '@tonejs/midi';
 import { MidiNoteUtils } from './midiNoteUtils';
@@ -11,7 +11,7 @@ interface MappedFile {
 }
 
 export class MidiMapper {
-  constructor(private readonly config: IMappingConfig, private readonly octaveOffset: number) {}
+  constructor(private readonly config: MappingConfig, private readonly octaveOffset: number) {}
 
   async mapFile(midiFile: File): Promise<MappedFile> {
     const data = await midiFile.arrayBuffer();

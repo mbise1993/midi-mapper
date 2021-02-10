@@ -10,13 +10,13 @@ interface FileInputProps {
   onChange(e: React.FormEvent<HTMLInputElement>): void;
 }
 
-export default function FileInput({
+export const FileInput: React.FC<FileInputProps> = ({
   inputText = 'Choose file...',
   buttonText = 'Browse',
   buttonClass = 'mm-btn-default',
   multiple = false,
   onChange,
-}: FileInputProps) {
+}) => {
   return (
     <div className={styles.container}>
       <span>{inputText}</span>
@@ -26,4 +26,4 @@ export default function FileInput({
       </button>
     </div>
   );
-}
+};

@@ -1,9 +1,8 @@
-import FileInput from './FileInput';
 import React from 'react';
 import { useDropzone } from 'react-dropzone';
 
 import { DEFAULT_MAPPING_TEXT } from '../services/mappingConfig';
-import { PageSection } from './PageSection';
+import { FileInput, PageSection } from '../../common/ui';
 
 import styles from './MappingConfigView.module.scss';
 

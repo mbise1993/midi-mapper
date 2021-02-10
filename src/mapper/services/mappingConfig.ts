@@ -4,19 +4,19 @@ C1 to D0
 G#1 to A3
 B5 to F-1`;
 
-export interface IMapping {
+export interface NoteMapping {
   from: string;
   to: string;
 }
 
-export interface IMappingConfig {
+export interface MappingConfig {
   name?: string;
-  mappings: IMapping[];
+  mappings: NoteMapping[];
 }
 
 export class MappingConfigParser {
-  parse(text: string): IMappingConfig {
-    const config: IMappingConfig = { mappings: [] };
+  parse(text: string): MappingConfig {
+    const config: MappingConfig = { mappings: [] };
 
     const lines = text.split('\n');
     if (lines.length === 0) {
@@ -41,7 +41,7 @@ export class MappingConfigParser {
     return config;
   }
 
-  private parseLine(line: string, lineNumber: number): IMapping {
+  private parseLine(line: string, lineNumber: number): NoteMapping {
     const tokens = line.split('to');
     if (tokens.length !== 2) {
       throw new Error(`Invalid syntax on line ${lineNumber}: "${line}"`);

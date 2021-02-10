@@ -1,11 +1,11 @@
 import { Midi } from '@tonejs/midi';
 
-import { IMappingConfig } from './mappingConfig';
-import { loadMidiFile } from '../test/loadResource';
+import { loadMidiFile } from '../../test/loadResource';
+import { MappingConfig } from './mappingConfig';
 import { MidiMapper } from './midiMapper';
 import { MidiNoteUtils } from './midiNoteUtils';
 
-const offset0Config: IMappingConfig = {
+const offset0Config: MappingConfig = {
   mappings: [
     {
       from: 'C3',
@@ -34,7 +34,7 @@ const offset0Config: IMappingConfig = {
   ],
 };
 
-const offset1Config: IMappingConfig = {
+const offset1Config: MappingConfig = {
   mappings: [
     {
       from: 'C2',
@@ -63,7 +63,7 @@ const offset1Config: IMappingConfig = {
   ],
 };
 
-const offset2Config: IMappingConfig = {
+const offset2Config: MappingConfig = {
   mappings: [
     {
       from: 'C1',

@@ -43,6 +43,15 @@ a {
 		"header header" 60px
 		"sidebar main" 1fr
 		/ 1fr 2fr;
+
+	@include mobile() {
+		height: auto;
+		display: grid;
+		grid:
+			"header" 60px
+			"main" 1fr
+			/ 1fr;
+	}
 }
 
 .mm-grid-header {

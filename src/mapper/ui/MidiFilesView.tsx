@@ -2,8 +2,7 @@ import React from 'react';
 import { FaTrash as DeleteIcon } from 'react-icons/fa';
 import { useDropzone } from 'react-dropzone';
 
-import FileInput from './FileInput';
-import { PageSection } from './PageSection';
+import { FileInput, PageSection } from '../../common/ui';
 
 import styles from './MidiFilesView.module.scss';
 

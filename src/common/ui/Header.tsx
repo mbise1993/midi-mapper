@@ -21,7 +21,7 @@ export const Header: React.FC = () => {
         target="_blank"
         rel="noreferrer"
       >
-        Documentation&nbsp;
+        Docs&nbsp;
         <GithubIcon size="1.5em" />
       </a>
     </div>
