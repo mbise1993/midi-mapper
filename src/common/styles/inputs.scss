@@ -1,0 +1,10 @@
+@import "tokens.scss";
+
+.mm-select {
+  margin: 0;
+  padding: 5px $space-sm;
+  color: $text-main;
+  background-color: transparent;
+  border: 1px solid $border-main;
+  border-radius: 4px;
+}

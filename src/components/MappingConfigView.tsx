@@ -1,15 +1,11 @@
 import FileInput from './FileInput';
 import React from 'react';
-import { FaInfo as InfoIcon } from 'react-icons/fa';
 import { useDropzone } from 'react-dropzone';
 
 import { DEFAULT_MAPPING_TEXT } from '../services/mappingConfig';
 import { PageSection } from './PageSection';
 
 import styles from './MappingConfigView.module.scss';
-
-const LOWEST_OCTAVE_INFO_TEXT = `Set this to the lowest octave that your MIDI editor uses 
-to ensure that the notes are mapped correctly`;
 
 interface MappingConfigViewProps {
   lowestOctave: number;
@@ -42,11 +38,13 @@ export const MappingConfigView: React.FC<MappingConfigViewProps> = ({
   return (
     <PageSection
       {...getRootProps()}
-      title="Mappings"
+      title="Mapping Config"
       headerRight={
         <div className={styles.headerRightContainer}>
-          <InfoIcon title={LOWEST_OCTAVE_INFO_TEXT} />
+          <label htmlFor="lowest-octave-select">Lowest octave</label>
           <select
+            id="lowest-octave-select"
+            className="mm-select"
             placeholder="Lowest octave"
             value={lowestOctave}
             onChange={e => onLowestOctaveChange(parseInt(e.target.value))}
@@ -59,7 +57,8 @@ export const MappingConfigView: React.FC<MappingConfigViewProps> = ({
         </div>
       }
     >
-      <input
+      <textarea
+        className={styles.editor}
         placeholder={DEFAULT_MAPPING_TEXT}
         value={text}
         onChange={e => onTextChange(e.target.value)}

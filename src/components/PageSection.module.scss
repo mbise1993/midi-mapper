@@ -1,17 +1,21 @@
+@import "tokens.scss";
+
 .sectionContainer {
   display: flex;
   flex-direction: column;
-  flex: 1;
+  height: 100%;
   overflow: auto;
-  background-color: white;
-  border: 0.4px solid gray;
-  border-radius: 4;
+  background-color: $surface-main;
 }
 
 .headerContainer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px;
-  background-color: red;
+  padding: $space-xs $space-sm;
+  background-color: $background-secondary;
+
+  & > h3 {
+    font-weight: normal;
+  }
 }

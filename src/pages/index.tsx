@@ -1,10 +1,10 @@
 import React from 'react';
 
 import { DEFAULT_MAPPING_TEXT } from '../services/mappingConfig';
+import { Header } from '../components/Header';
 import { MappingConfigView } from '../components/MappingConfigView';
 import { MappingService } from '../services/mappingService';
 import { MidiFilesView } from '../components/MidiFilesView';
-import { Page } from '../components/Page';
 import { storageService } from '../services/storageService';
 
 const LOWEST_OCTAVE_STORAGE_KEY = 'lowest-octave';
@@ -57,20 +57,27 @@ export default function Index() {
   };
 
   return (
-    <Page>
-      <MidiFilesView
-        files={midiFiles}
-        onFilesSelected={onMidiFilesSelected}
-        onDeleteClick={onFileDeleteClick}
-      />
-      <MappingConfigView
-        lowestOctave={lowestOctave}
-        text={mappingText}
-        onLowestOctaveChange={onLowestOctaveChange}
-        onTextChange={onMappingTextChange}
-      />
+    <div className="mm-grid-container">
+      <div className="mm-grid-header">
+        <Header />
+      </div>
+      <div className="mm-grid-sidebar">
+        <MidiFilesView
+          files={midiFiles}
+          onFilesSelected={onMidiFilesSelected}
+          onDeleteClick={onFileDeleteClick}
+        />
+      </div>
+      <div className="mm-grid-main">
+        <MappingConfigView
+          lowestOctave={lowestOctave}
+          text={mappingText}
+          onLowestOctaveChange={onLowestOctaveChange}
+          onTextChange={onMappingTextChange}
+        />
+      </div>
       <button
-        className="mm-btn-primary"
+        className="mm-btn-primary mm-btn-lg mm-map-btn"
         disabled={isLoading || midiFiles.length === 0}
         onClick={onMapClick}
       >
@@ -86,6 +93,6 @@ export default function Index() {
           </button>
         </div>
       )}
-    </Page>
+    </div>
   );
 }

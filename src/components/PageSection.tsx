@@ -7,14 +7,18 @@ interface PageSectionProps {
   headerRight?: React.ReactElement;
 }
 
-export const PageSection: React.FC<PageSectionProps> = ({ title, headerRight, children }) => {
-  return (
-    <div className={styles.sectionContainer}>
-      <div className={styles.headerContainer}>
-        <h3>{title}</h3>
-        {headerRight}
+export const PageSection: React.FC<PageSectionProps> = React.forwardRef(
+  ({ title, headerRight, children }, ref) => {
+    return (
+      <div ref={ref as any} className={styles.sectionContainer}>
+        <div className={styles.headerContainer}>
+          <h3>{title}</h3>
+          {headerRight}
+        </div>
+        {children}
       </div>
-      {children}
-    </div>
-  );
-};
+    );
+  },
+);
+
+PageSection.displayName = 'PageSection';

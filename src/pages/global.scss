@@ -1,9 +1,19 @@
+@import "normalize.scss";
 @import "buttons.scss";
+@import "inputs.scss";
 @import "lists.scss";
 @import "surfaces.scss";
 
-body {
-	box-sizing: border-box;
+@font-face {
+	font-family: 'Open Sans';
+	src: url(/fonts/OpenSans-Regular.ttf);
+	font-weight: normal;
+}
+
+@font-face {
+	font-family: 'Open Sans';
+	src: url(/fonts/OpenSans-SemiBold.ttf);
+	font-weight: bold;
 }
 
 *,
@@ -12,4 +22,43 @@ body {
 	margin: 0;
 	padding: 0;
 	box-sizing: inherit;
+	font-family: 'Open Sans', sans-serif;
+	color: $text-main;
+}
+
+body {
+	box-sizing: border-box;
+	background-color: $background-main;
+}
+
+a {
+	text-decoration: none;
+}
+
+.mm-grid-container {
+	height: 100vh;
+	width: 100vw;
+  display: grid;
+	grid:
+		"header header" 60px
+		"sidebar main" 1fr
+		/ 1fr 2fr;
+}
+
+.mm-grid-header {
+  grid-area: header;
+}
+
+.mm-grid-sidebar {
+  grid-area: sidebar;
+}
+
+.mm-grid-main {
+  grid-area: main;
+}
+
+.mm-map-btn {
+	position: absolute;
+	bottom: $space-md;
+	right: $space-md;
 }

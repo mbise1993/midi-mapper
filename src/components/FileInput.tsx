@@ -13,7 +13,7 @@ interface FileInputProps {
 export default function FileInput({
   inputText = 'Choose file...',
   buttonText = 'Browse',
-  buttonClass = 'mm-btn-text',
+  buttonClass = 'mm-btn-default',
   multiple = false,
   onChange,
 }: FileInputProps) {

@@ -4,7 +4,15 @@
   display: flex;
   align-items: center;
 
-  & > * {
-    margin-left: $space-sm;
+  & > select {
+    margin: 0 $space-sm;
   }
+}
+
+.editor {
+  height: 100%;
+  width: 100%;
+  color: $text-inverted;
+  background-color: $background-main;
+  padding: $space-sm;
 }

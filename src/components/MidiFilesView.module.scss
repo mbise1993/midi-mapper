@@ -6,10 +6,9 @@
   justify-content: center;
   width: 100%;
   padding: $space-md;
-  margin-top: $space-xl;
+  margin-top: $space-md;
 
   & > span {
-    color: gray;
-    font-size: 1.5rem;
+    color: $text-secondary;
   }
 }

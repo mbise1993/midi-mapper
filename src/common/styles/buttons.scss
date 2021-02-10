@@ -2,14 +2,16 @@
 
 @mixin button() {
   padding: $space-xs $space-sm;
-  border: 1px solid $border-main;
+  font-size: 1rem;
+  border: none;
   border-radius: 4px;
   cursor: pointer;
 }
 
 .mm-btn-default {
   @include button();
-  background-color: $background-main;
+  background-color: transparent;
+  border: 1px solid $border-main;
 }
 
 .mm-btn-primary {
@@ -31,4 +33,9 @@
 .mm-btn-icon {
   background-color: transparent;
   cursor: pointer;
+}
+
+.mm-btn-lg {
+  padding: $space-sm $space-md;
+  font-size: 1.2rem;
 }
