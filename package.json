@@ -16,7 +16,7 @@
     "@material-ui/icons": "^4.9.1",
     "@tonejs/midi": "^2.0.23",
     "file-saver": "^2.0.2",
-    "jszip": "^3.5.0",
+    "jszip": "^3.7.0",
     "next": "9.4.4",
     "react": "16.13.1",
     "react-dom": "16.13.1",
