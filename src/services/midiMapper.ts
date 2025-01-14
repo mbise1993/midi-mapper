@@ -6,41 +6,46 @@ import { MidiNoteUtils } from './midiNoteUtils';
 type Note = Track['notes'][0];
 
 interface MappedFile {
-  name: string;
-  data: Blob;
+	name: string;
+	data: Blob;
 }
 
 export class MidiMapper {
-  constructor(private readonly config: IMappingConfig, private readonly octaveOffset: number) {}
+	constructor(
+		private readonly config: IMappingConfig,
+		private readonly octaveOffset: number,
+	) {}
 
-  async mapFile(midiFile: File): Promise<MappedFile> {
-    const data = await midiFile.arrayBuffer();
-    const midi = new Midi(data);
+	async mapFile(midiFile: File): Promise<MappedFile> {
+		const data = await midiFile.arrayBuffer();
+		const midi = new Midi(data);
 
-    midi.tracks.forEach(track => {
-      track.notes.forEach(note => this.mapNote(note));
-    });
+		for (const track of midi.tracks) {
+			for (const note of track.notes) {
+				this.mapNote(note);
+			}
+		}
 
-    return {
-      name: `${this.stripFileExtension(midiFile.name)} - Mapped.mid`,
-      data: new Blob([midi.toArray()]),
-    };
-  }
+		return {
+			name: `${this.stripFileExtension(midiFile.name)} - Mapped.mid`,
+			data: new Blob([midi.toArray()]),
+		};
+	}
 
-  async mapFiles(midiFiles: File[]) {
-    return Promise.all(midiFiles.map(file => this.mapFile(file)));
-  }
+	async mapFiles(midiFiles: File[]) {
+		return Promise.all(midiFiles.map((file) => this.mapFile(file)));
+	}
 
-  private mapNote(note: Note) {
-    const noteName = MidiNoteUtils.midiValueToNoteName(note.midi, this.octaveOffset);
-    const mapping = this.config.mappings.find(m => m.from === noteName);
-    if (mapping) {
-      note.midi = MidiNoteUtils.noteNameToMidiValue(mapping.to, this.octaveOffset);
-    }
-  }
+	private mapNote(note: Note) {
+		const noteName = MidiNoteUtils.midiValueToNoteName(note.midi, this.octaveOffset);
+		const mapping = this.config.mappings.find((m) => m.from === noteName);
+		if (mapping) {
+			note.midi = MidiNoteUtils.noteNameToMidiValue(mapping.to, this.octaveOffset);
+		}
+	}
 
-  private stripFileExtension(fileName: string): string {
-    const index = fileName.lastIndexOf('.');
-    return index > -1 ? fileName.substring(0, index) : fileName;
-  }
+	private stripFileExtension(fileName: string): string {
+		const index = fileName.lastIndexOf('.');
+		return index > -1 ? fileName.substring(0, index) : fileName;
+	}
 }
